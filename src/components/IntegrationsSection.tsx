@@ -253,19 +253,22 @@ interface IconConfig {
   x: number; // px from center
   y: number; // px from center
   size: number; // container size
+  mobileX?: number;
+  mobileY?: number;
+  mobileSize?: number;
 }
 
 const integrationIcons: IconConfig[] = [
-  { id: "nice", icon: NiceIcon, x: -440, y: -220, size: 80 },
-  { id: "star", icon: StarIcon, x: -140, y: -200, size: 72 },
-  { id: "latitude", icon: LatitudeIcon, x: 160, y: -220, size: 80 },
-  { id: "dice", icon: DiceIcon, x: 440, y: -200, size: 72 },
-  { id: "engage", icon: EngageIcon, x: -380, y: -20, size: 80 },
-  { id: "spotify", icon: SpotifyIcon, x: 400, y: -20, size: 72 },
-  { id: "salesforce", icon: SalesforceIcon, x: -300, y: 140, size: 80 },
-  { id: "pipedrive", icon: PipedriveIcon, x: -380, y: 260, size: 72 },
-  { id: "fiserv", icon: FiservIcon, x: 160, y: 260, size: 80 },
-  { id: "zapier", icon: ZapierIcon, x: 440, y: 230, size: 72 },
+  { id: "nice", icon: NiceIcon, x: -440, y: -220, size: 80, mobileX: -160, mobileY: -170, mobileSize: 58 },
+  { id: "star", icon: StarIcon, x: -140, y: -200, size: 72, mobileX: -40, mobileY: -150, mobileSize: 52 },
+  { id: "latitude", icon: LatitudeIcon, x: 160, y: -220, size: 80, mobileX: 85, mobileY: -170, mobileSize: 58 },
+  { id: "dice", icon: DiceIcon, x: 440, y: -200, size: 72, mobileX: 160, mobileY: -130, mobileSize: 52 },
+  { id: "engage", icon: EngageIcon, x: -380, y: -20, size: 80, mobileX: -160, mobileY: -25, mobileSize: 58 },
+  { id: "spotify", icon: SpotifyIcon, x: 400, y: -20, size: 72, mobileX: 160, mobileY: -20, mobileSize: 52 },
+  { id: "salesforce", icon: SalesforceIcon, x: -300, y: 140, size: 80, mobileX: -120, mobileY: 110, mobileSize: 58 },
+  { id: "pipedrive", icon: PipedriveIcon, x: -380, y: 260, size: 72, mobileX: -160, mobileY: 185, mobileSize: 52 },
+  { id: "fiserv", icon: FiservIcon, x: 160, y: 260, size: 80, mobileX: 90, mobileY: 180, mobileSize: 58 },
+  { id: "zapier", icon: ZapierIcon, x: 440, y: 230, size: 72, mobileX: 160, mobileY: 135, mobileSize: 52 },
 ];
 
 // ─── IntegrationsSection ────────────────────────────────────────────────────
@@ -350,6 +353,9 @@ export default function IntegrationsSection() {
                 x={item.x}
                 y={item.y}
                 size={item.size}
+                mobileX={item.mobileX}
+                mobileY={item.mobileY}
+                mobileSize={item.mobileSize}
                 convergeFactor={convergeFactor}
                 opacity={iconsOpacity}
                 scale={iconsScale}
@@ -407,177 +413,8 @@ export default function IntegrationsSection() {
           style={{ opacity: dashboardOpacity, y: dashboardY }}
         >
           <div className="w-full max-w-[1600px] mx-auto px-5 md:px-8 flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            {/* Left text */}
-            <div className="flex-shrink-0 max-w-full md:max-w-[720px] text-center md:text-left">
-              <span className="inline-block border border-white/20 text-white/70 text-[11px] font-semibold tracking-[0.15em] uppercase px-3 py-1.5 rounded mb-6">
-                Dashboard
-              </span>
-              <h2 className="text-white text-[28px] sm:text-[36px] md:text-[44px] font-bold leading-[1.1] tracking-tight mb-5">
-                Your Mission Control
-                <br />
-                for End-To-End
-                <br />
-                Servicing
-              </h2>
-              <p className="text-white/50 text-[14px] leading-[1.7] mb-8">
-                A centralized command center for high-stakes recovery. Track performance and agent activity in real-time with a continuous data stream designed for rapid, informed decision-making.
-              </p>
-              <button className="bg-[#3b82f6] text-white text-[13px] font-semibold px-6 py-3 rounded-full flex items-center gap-2 hover:bg-[#2563eb] transition-colors mx-auto md:mx-0">
-                Start a Pilot
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="7" fill="white" fillOpacity="0.2" />
-                  <path d="M6 5l4 3-4 3" fill="white" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Right laptop mockup */}
-            <div className="flex-1 relative hidden md:block">
-              <div className="relative">
-                {/* Laptop screen */}
-                <div className="bg-[#111827] rounded-t-xl border border-white/10 overflow-hidden shadow-2xl">
-                  {/* Browser chrome */}
-                  <div className="flex items-center gap-1.5 px-4 py-2 bg-[#1a2332] border-b border-white/5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-                    <div className="flex-1 flex justify-center">
-                      <div className="bg-[#0d1520] rounded-md px-12 py-1">
-                        <span className="text-white/30 text-[9px]">dashboard.omnistra.ai</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Dashboard content */}
-                  <div className="flex min-h-[360px]">
-                    {/* Sidebar */}
-                    <div className="w-[140px] bg-[#0d1520] border-r border-white/5 p-3 flex flex-col gap-1">
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className="w-5 h-5 rounded bg-blue-600 flex items-center justify-center">
-                          <span className="text-white text-[6px] font-bold">O</span>
-                        </div>
-                        <span className="text-white/70 text-[9px] font-semibold">omni</span>
-                      </div>
-                      {["Inbox", "Alerts", "Dashboard", "Calls", "Company Manager", "Workflow Studio", "Analytics", "Help"].map(
-                        (item, i) => (
-                          <div
-                            key={item}
-                            className={`flex items-center gap-2 px-2 py-1.5 rounded text-[8px] ${
-                              i === 2
-                                ? "bg-blue-600/20 text-blue-400"
-                                : "text-white/40 hover:text-white/60"
-                            }`}
-                          >
-                            <div className="w-3 h-3 rounded bg-white/10" />
-                            {item}
-                          </div>
-                        )
-                      )}
-                    </div>
-
-                    {/* Main content area */}
-                    <div className="flex-1 p-4">
-                      <div className="flex items-center justify-between mb-4">
-                        <div>
-                          <h3 className="text-white text-[11px] font-semibold">Welcome back, John</h3>
-                          <p className="text-white/30 text-[7px]">Track call performance, distributions, and analytics.</p>
-                        </div>
-                        <button className="bg-[#1a2332] text-white/50 text-[7px] px-3 py-1.5 rounded border border-white/10">
-                          Download Report
-                        </button>
-                      </div>
-
-                      <p className="text-white/40 text-[8px] mb-3 font-semibold">Overview</p>
-
-                      {/* Stat cards */}
-                      <div className="grid grid-cols-3 gap-2 mb-4">
-                        {[
-                          { label: "Total Calls", value: "78,324", change: "+22%", color: "text-green-400" },
-                          { label: "Avg Call Duration", value: "155s", change: "-3.6%", color: "text-red-400" },
-                          { label: "Contact Rate", value: "82%", change: "+2.1%", color: "text-green-400" },
-                        ].map((stat) => (
-                          <div
-                            key={stat.label}
-                            className="bg-[#1a2332] rounded-lg p-3 border border-white/5"
-                          >
-                            <div className="flex items-center gap-1.5 mb-2">
-                              <div className="w-4 h-4 rounded-full bg-blue-600/20 flex items-center justify-center">
-                                <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                              </div>
-                              <span className="text-white/40 text-[7px]">{stat.label}</span>
-                            </div>
-                            <div className="flex items-baseline gap-1.5">
-                              <span className="text-white text-[16px] font-bold">{stat.value}</span>
-                              <span className={`text-[7px] ${stat.color}`}>{stat.change}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Tables */}
-                      <div className="grid grid-cols-2 gap-2">
-                        {/* Client Priority */}
-                        <div className="bg-[#1a2332] rounded-lg p-3 border border-white/5">
-                          <p className="text-white/50 text-[8px] font-semibold mb-2">Client Priority</p>
-                          <div className="space-y-1">
-                            {["Rebecca", "Nike", "Alex", "Rebecca", "Evelyn"].map((name, i) => (
-                              <div key={i} className="flex items-center gap-2 text-[7px]">
-                                <span className="text-white/30 w-12 truncate">TBD-x9{i}0{i}92...</span>
-                                <div className="w-4 h-4 rounded-full bg-white/10" />
-                                <span className="text-white/50 flex-1">{name}</span>
-                                <span className={`px-1.5 py-0.5 rounded text-[6px] font-medium ${
-                                  i === 0
-                                    ? "bg-red-500/20 text-red-400"
-                                    : i === 3
-                                    ? "bg-yellow-500/20 text-yellow-400"
-                                    : "bg-green-500/20 text-green-400"
-                                }`}>
-                                  {i === 0 ? "High" : i === 3 ? "Medium" : "Low"}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Contactability */}
-                        <div className="bg-[#1a2332] rounded-lg p-3 border border-white/5">
-                          <p className="text-white/50 text-[8px] font-semibold mb-2">Contactability</p>
-                          <div className="space-y-1">
-                            {["Answered", "Outbound", "Answered", "Answered", "Answered"].map((status, i) => (
-                              <div key={i} className="flex items-center gap-2 text-[7px]">
-                                <span className="text-white/30 w-10 truncate">cLaH{i}1...</span>
-                                <span className={`px-1.5 py-0.5 rounded text-[6px] font-medium ${
-                                  status === "Answered"
-                                    ? "bg-green-500/20 text-green-400"
-                                    : "bg-blue-500/20 text-blue-400"
-                                }`}>
-                                  {status}
-                                </span>
-                                <span className="text-white/30 flex-1">Outbound</span>
-                                <span className="text-white/30">0.{i}1</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Laptop base */}
-                <div className="h-4 bg-gradient-to-b from-[#2a3444] to-[#3a4454] rounded-b-xl mx-8" />
-                <div className="h-2 bg-[#4a5464] rounded-b-2xl mx-16" />
-              </div>
-
-              {/* User avatar at bottom-left of laptop */}
-              <div className="absolute -bottom-2 left-4 flex items-center gap-2 bg-[#1a2332] rounded-full px-3 py-1.5 border border-white/10">
-                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
-                <div>
-                  <span className="text-white text-[8px] font-semibold block">John Smith</span>
-                  <span className="text-white/30 text-[6px]">john@omnistra.ai</span>
-                </div>
-              </div>
-            </div>
+            <DashboardTextContent />
+            <LaptopMockup className="mt-12 md:mt-0 w-full max-w-[420px] sm:max-w-[520px] mx-auto md:mx-0 md:max-w-none md:flex-1" />
           </div>
 
           {/* Decorative grid lines in dark background */}
@@ -620,6 +457,9 @@ interface IntegrationIconProps {
   x: number;
   y: number;
   size: number;
+  mobileX?: number;
+  mobileY?: number;
+  mobileSize?: number;
   convergeFactor: MotionValue<number>;
   opacity: MotionValue<number>;
   scale: MotionValue<number>;
@@ -630,19 +470,21 @@ function IntegrationIcon({
   x,
   y,
   size,
+  mobileX,
+  mobileY,
+  mobileSize,
   convergeFactor,
   opacity,
   scale,
 }: IntegrationIconProps) {
-  // Scale down positions for mobile (roughly 0.45x)
-  const mobileX = x * 0.45;
-  const mobileY = y * 0.45;
-  const mobileSize = size * 0.65;
+  const resolvedMobileX = mobileX ?? x * 0.45;
+  const resolvedMobileY = mobileY ?? y * 0.45;
+  const resolvedMobileSize = mobileSize ?? size * 0.65;
 
   const posX = useTransform(convergeFactor, [0, 1], [x, 0]) as MotionValue<number>;
   const posY = useTransform(convergeFactor, [0, 1], [y, 0]) as MotionValue<number>;
-  const mobilePosX = useTransform(convergeFactor, [0, 1], [mobileX, 0]) as MotionValue<number>;
-  const mobilePosY = useTransform(convergeFactor, [0, 1], [mobileY, 0]) as MotionValue<number>;
+  const mobilePosX = useTransform(convergeFactor, [0, 1], [resolvedMobileX, 0]) as MotionValue<number>;
+  const mobilePosY = useTransform(convergeFactor, [0, 1], [resolvedMobileY, 0]) as MotionValue<number>;
 
   return (
     <>
@@ -664,8 +506,8 @@ function IntegrationIcon({
       <motion.div
         className="absolute z-20 bg-white rounded-lg shadow-lg items-center justify-center flex md:hidden"
         style={{
-          width: mobileSize,
-          height: mobileSize,
+          width: resolvedMobileSize,
+          height: resolvedMobileSize,
           x: mobilePosX,
           y: mobilePosY,
           opacity,
@@ -675,5 +517,183 @@ function IntegrationIcon({
         {icon}
       </motion.div>
     </>
+  );
+}
+
+function DashboardTextContent({ className = "" }: { className?: string }) {
+  return (
+    <div className={`flex-shrink-0 max-w-full md:max-w-[720px] text-center md:text-left ${className}`}>
+      <span className="inline-block border border-white/20 text-white/70 text-[11px] font-semibold tracking-[0.15em] uppercase px-3 py-1.5 rounded mb-6">
+        Dashboard
+      </span>
+      <h2 className="text-white text-[28px] sm:text-[36px] md:text-[44px] font-bold leading-[1.1] tracking-tight mb-5">
+        Your Mission Control
+        <br />
+        for End-To-End
+        <br />
+        Servicing
+      </h2>
+      <p className="text-white/50 text-[14px] leading-[1.7] mb-8">
+        A centralized command center for high-stakes recovery. Track performance and agent activity in real-time with a continuous data stream designed for rapid, informed decision-making.
+      </p>
+      <button className="bg-[#3b82f6] text-white text-[13px] font-semibold px-6 py-3 rounded-full flex items-center gap-2 hover:bg-[#2563eb] transition-colors mx-auto md:mx-0">
+        Start a Pilot
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7" fill="white" fillOpacity="0.2" />
+          <path d="M6 5l4 3-4 3" fill="white" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+function LaptopMockup({ className = "" }: { className?: string }) {
+  return (
+    <div className={`relative ${className}`}>
+      <div className="relative">
+        {/* Laptop screen */}
+        <div className="bg-[#111827] rounded-t-xl border border-white/10 overflow-hidden shadow-2xl">
+          {/* Browser chrome */}
+          <div className="flex items-center gap-1.5 px-4 py-2 bg-[#1a2332] border-b border-white/5">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+            <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+            <div className="flex-1 flex justify-center">
+              <div className="bg-[#0d1520] rounded-md px-12 py-1">
+                <span className="text-white/30 text-[9px]">dashboard.omnistra.ai</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Dashboard content */}
+          <div className="flex min-h-[360px]">
+            {/* Sidebar */}
+            <div className="w-[140px] bg-[#0d1520] border-r border-white/5 p-3 flex flex-col gap-1">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-5 h-5 rounded bg-blue-600 flex items-center justify-center">
+                  <span className="text-white text-[6px] font-bold">O</span>
+                </div>
+                <span className="text-white/70 text-[9px] font-semibold">omni</span>
+              </div>
+              {["Inbox", "Alerts", "Dashboard", "Calls", "Company Manager", "Workflow Studio", "Analytics", "Help"].map(
+                (item, i) => (
+                  <div
+                    key={item}
+                    className={`flex items-center gap-2 px-2 py-1.5 rounded text-[8px] ${
+                      i === 2
+                        ? "bg-blue-600/20 text-blue-400"
+                        : "text-white/40 hover:text-white/60"
+                    }`}
+                  >
+                    <div className="w-3 h-3 rounded bg-white/10" />
+                    {item}
+                  </div>
+                )
+              )}
+            </div>
+
+            {/* Main content area */}
+            <div className="flex-1 p-4">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-white text-[11px] font-semibold">Welcome back, John</h3>
+                  <p className="text-white/30 text-[7px]">Track call performance, distributions, and analytics.</p>
+                </div>
+                <button className="bg-[#1a2332] text-white/50 text-[7px] px-3 py-1.5 rounded border border-white/10">
+                  Download Report
+                </button>
+              </div>
+
+              <p className="text-white/40 text-[8px] mb-3 font-semibold">Overview</p>
+
+              {/* Stat cards */}
+              <div className="grid grid-cols-3 gap-2 mb-4">
+                {[
+                  { label: "Total Calls", value: "78,324", change: "+22%", color: "text-green-400" },
+                  { label: "Avg Call Duration", value: "155s", change: "-3.6%", color: "text-red-400" },
+                  { label: "Contact Rate", value: "82%", change: "+2.1%", color: "text-green-400" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="bg-[#1a2332] rounded-lg p-3 border border-white/5"
+                  >
+                    <div className="flex items-center gap-1.5 mb-2">
+                      <div className="w-4 h-4 rounded-full bg-blue-600/20 flex items-center justify-center">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      </div>
+                      <span className="text-white/40 text-[7px]">{stat.label}</span>
+                    </div>
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-white text-[16px] font-bold">{stat.value}</span>
+                      <span className={`text-[7px] ${stat.color}`}>{stat.change}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Tables */}
+              <div className="grid grid-cols-2 gap-2">
+                {/* Client Priority */}
+                <div className="bg-[#1a2332] rounded-lg p-3 border border-white/5">
+                  <p className="text-white/50 text-[8px] font-semibold mb-2">Client Priority</p>
+                  <div className="space-y-1">
+                    {["Rebecca", "Nike", "Alex", "Rebecca", "Evelyn"].map((name, i) => (
+                      <div key={i} className="flex items-center gap-2 text-[7px]">
+                        <span className="text-white/30 w-12 truncate">TBD-x9{i}0{i}92...</span>
+                        <div className="w-4 h-4 rounded-full bg-white/10" />
+                        <span className="text-white/50 flex-1">{name}</span>
+                        <span className={`px-1.5 py-0.5 rounded text-[6px] font-medium ${
+                          i === 0
+                            ? "bg-red-500/20 text-red-400"
+                            : i === 3
+                            ? "bg-yellow-500/20 text-yellow-400"
+                            : "bg-green-500/20 text-green-400"
+                        }`}>
+                          {i === 0 ? "High" : i === 3 ? "Medium" : "Low"}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Contactability */}
+                <div className="bg-[#1a2332] rounded-lg p-3 border border-white/5">
+                  <p className="text-white/50 text-[8px] font-semibold mb-2">Contactability</p>
+                  <div className="space-y-1">
+                    {["Answered", "Outbound", "Answered", "Answered", "Answered"].map((status, i) => (
+                      <div key={i} className="flex items-center gap-2 text-[7px]">
+                        <span className="text-white/30 w-10 truncate">cLaH{i}1...</span>
+                        <span className={`px-1.5 py-0.5 rounded text-[6px] font-medium ${
+                          status === "Answered"
+                            ? "bg-green-500/20 text-green-400"
+                            : "bg-blue-500/20 text-blue-400"
+                        }`}>
+                          {status}
+                        </span>
+                        <span className="text-white/30 flex-1">Outbound</span>
+                        <span className="text-white/30">0.{i}1</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Laptop base */}
+        <div className="h-4 bg-gradient-to-b from-[#2a3444] to-[#3a4454] rounded-b-xl mx-8" />
+        <div className="h-2 bg-[#4a5464] rounded-b-2xl mx-16" />
+      </div>
+
+      {/* User avatar at bottom-left of laptop */}
+      <div className="absolute -bottom-2 left-4 flex items-center gap-2 bg-[#1a2332] rounded-full px-3 py-1.5 border border-white/10">
+        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
+        <div>
+          <span className="text-white text-[8px] font-semibold block">John Smith</span>
+          <span className="text-white/30 text-[6px]">john@omnistra.ai</span>
+        </div>
+      </div>
+    </div>
   );
 }

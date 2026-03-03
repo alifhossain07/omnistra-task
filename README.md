@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Omnistra Frontend Assignment
 
-## Getting Started
+Next.js landing-page style implementation with interactive navbar dropdowns, integrations visuals, and responsive mobile menu behavior.
 
-First, run the development server:
+## 1) Public GitHub Repository
+
+Repository URL: **ADD_YOUR_PUBLIC_GITHUB_REPO_LINK_HERE**
+
+## 2) Setup Instructions
+
+### Prerequisites
+
+- Node.js 18.18+ (or 20+ recommended)
+- npm 9+
+
+### Install
+
+```bash
+npm install
+```
+
+## 3) Run Instructions
+
+### Local Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+App runs at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Production Build
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Start Production Server (after build)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 4) Screenshots 
+- added screenshots in the /screenshots folder.
 
-## Deploy on Vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 5) Assumptions Made
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The project targets modern Chromium-based browsers and Safari/Firefox latest stable versions.
+- The requested navbar behavior prioritizes fixed center-menu alignment while side groups animate on hover.
+- Mobile sidebar product cards are implemented to visually match the provided reference while preserving existing component structure.
+- Colors/spacing were kept within the current design language and existing Tailwind setup.
+- The submission scope is front-end only (no backend/API integration required).
+
+## Tech Stack
+
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+
+

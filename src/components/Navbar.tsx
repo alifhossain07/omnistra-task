@@ -18,7 +18,7 @@ const menuItems = [
 
 // ─── Chargeflow Logo (chain-link / infinity style) ───────────────────────────
 
-const LogoIcon = ({ size = 28, color = "white" }: { size?: number; color?: string }) => (
+const LogoIcon = ({ size = 50, color = "white" }: { size?: number; color?: string }) => (
   <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
     <path
       d="M20 8c-4.4 0-8 3.6-8 8 0 2.2.9 4.2 2.3 5.7L20 16l5.7 5.7A8 8 0 0028 16c0-4.4-3.6-8-8-8z"
@@ -33,8 +33,8 @@ const LogoIcon = ({ size = 28, color = "white" }: { size?: number; color?: strin
 
 const ChargeflowLogo = ({ color = "white" }: { color?: string }) => (
   <div className="flex items-center gap-2.5 cursor-pointer">
-    <LogoIcon size={30} color={color} />
-    <span className="text-lg font-semibold tracking-tight" style={{ color }}>
+    <LogoIcon size={50} color={color} />
+    <span className="text-xl font-semibold tracking-tight" style={{ color }}>
       chargeflow
     </span>
   </div>
@@ -499,6 +499,39 @@ const mobileDropdownItems: Record<string, string[]> = {
   COMPANY: ["Who we are", "Brand", "Become a Partner", "Careers", "Contact us"],
 };
 
+const mobileProductCards = [
+  {
+    title: "Prevent",
+    badge: "NEW",
+    desc: "Stop friendly fraud, block digital shoplifters & prevent the next chargeback before it happens.",
+    bg: "circle" as const,
+  },
+  {
+    title: "Automation",
+    badge: null,
+    desc: "Fully automated chargeback recovery with 4x ROI guarantee.",
+    bg: "rings" as const,
+  },
+  {
+    title: "Alerts",
+    badge: null,
+    desc: "Prevent 90% of chargebacks before they happen, powered by Visa and Mastercard.",
+    bg: "waves" as const,
+  },
+  {
+    title: "Insights",
+    badge: "FREE",
+    desc: "Get a bird's-eye view into your payments and chargebacks, all in a single, powerful dashboard.",
+    bg: "grid" as const,
+  },
+  {
+    title: "Connect",
+    badge: "FOR PLATFORMS",
+    desc: "Integrate Chargeflow into your platform, either via Embedding, Whitelabel or API.",
+    bg: "dashed" as const,
+  },
+];
+
 // ─── Mobile Navbar ──────────────────────────────────────────────────────────
 
 const MobileNav = ({ theme }: { theme: NavTheme }) => {
@@ -509,11 +542,18 @@ const MobileNav = ({ theme }: { theme: NavTheme }) => {
     setExpandedItem(expandedItem === label ? null : label);
   };
 
+  const mobileLogoColor = isOpen ? "white" : theme === "light" ? "#0a1e3d" : "white";
+
   return (
     <div className="md:hidden fixed top-0 left-0 right-0 z-50">
       {/* Top bar */}
       <div className="flex items-center justify-between px-5 py-4">
-        <LogoIcon size={28} color={isOpen ? "white" : theme === "light" ? "#0a1e3d" : "white"} />
+        <div className="flex items-center gap-2">
+          <LogoIcon size={28} color={mobileLogoColor} />
+          <span className="text-lg font-semibold tracking-tight" style={{ color: mobileLogoColor }}>
+            chargeflow
+          </span>
+        </div>
         <button
           onClick={() => { setIsOpen(!isOpen); setExpandedItem(null); }}
           className="relative w-8 h-8 flex items-center justify-center z-50"
@@ -523,19 +563,19 @@ const MobileNav = ({ theme }: { theme: NavTheme }) => {
               animate={isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
               className="w-6 h-[2px] rounded-full"
-              style={{ backgroundColor: isOpen ? "white" : theme === "light" ? "#0a1e3d" : "white" }}
+              style={{ backgroundColor: mobileLogoColor }}
             />
             <motion.div
               animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
               transition={{ duration: 0.15 }}
               className="w-6 h-[2px] rounded-full"
-              style={{ backgroundColor: isOpen ? "white" : theme === "light" ? "#0a1e3d" : "white" }}
+              style={{ backgroundColor: mobileLogoColor }}
             />
             <motion.div
               animate={isOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
               className="w-6 h-[2px] rounded-full"
-              style={{ backgroundColor: isOpen ? "white" : theme === "light" ? "#0a1e3d" : "white" }}
+              style={{ backgroundColor: mobileLogoColor }}
             />
           </div>
         </button>
@@ -594,16 +634,42 @@ const MobileNav = ({ theme }: { theme: NavTheme }) => {
                           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                           className="overflow-hidden"
                         >
-                          <div className="pb-3 pl-2 space-y-3">
-                            {mobileDropdownItems[item.label].map((sub) => (
-                              <button
-                                key={sub}
-                                className="block text-white/70 text-[13px] font-medium hover:text-white transition-colors"
-                              >
-                                {sub}
-                              </button>
-                            ))}
-                          </div>
+                          {item.label === "PRODUCT" ? (
+                            <div className="pb-4 space-y-3">
+                              {mobileProductCards.map((product) => (
+                                <button
+                                  key={product.title}
+                                  className="relative w-full bg-[#0f1116] rounded-2xl border border-white/10 overflow-hidden p-4 text-left"
+                                >
+                                  <div className="relative z-10 flex items-center gap-2 mb-2">
+                                    <span className="text-white text-[18px] font-semibold leading-none">{product.title}</span>
+                                    {product.badge && (
+                                      <span className="bg-white text-[#11131a] text-[11px] px-2 py-[2px] rounded-full font-semibold tracking-[0.04em]">
+                                        {product.badge}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <p className="relative z-10 text-white/75 text-[16px] leading-[1.35] max-w-[92%]">
+                                    {product.desc}
+                                  </p>
+                                  <div className="absolute inset-0 opacity-45">
+                                    <CardBg variant={product.bg} />
+                                  </div>
+                                </button>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="pb-3 pl-2 space-y-3">
+                              {mobileDropdownItems[item.label].map((sub) => (
+                                <button
+                                  key={sub}
+                                  className="block text-white/70 text-[13px] font-medium hover:text-white transition-colors"
+                                >
+                                  {sub}
+                                </button>
+                              ))}
+                            </div>
+                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -625,14 +691,21 @@ export default function Navbar({ theme = "dark" }: { theme?: NavTheme }) {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isDropdownOpen = activeMenu !== null && activeMenu in dropdownMap;
+  const sideShift = isDropdownOpen ? 72 : 0;
+  const sideScale = isDropdownOpen ? 0.9 : 1;
+  const navbarWidth = isDropdownOpen ? "72vw" : "83.33vw";
 
-  const logoColor = theme === "light" && !isDropdownOpen ? "#0a1e3d" : "white";
+  const logoColor = theme === "light" ? "#0a1e3d" : "white";
   const textColor = theme === "light" && !isDropdownOpen ? "text-[#0a1e3d]" : "text-white";
   const textMutedColor = theme === "light" && !isDropdownOpen ? "text-[#0a1e3d]/60" : "text-white/60";
   const textMutedHover = theme === "light" && !isDropdownOpen ? "hover:text-[#0a1e3d]" : "hover:text-white";
   const pillBg = theme === "light" && !isDropdownOpen ? "bg-white/70" : "bg-[#18181d]/90";
   const pillBorder = theme === "light" && !isDropdownOpen ? "border-[#0a1e3d]/10" : "border-white/[0.06]";
-  const signInColor = theme === "light" && !isDropdownOpen ? "text-[#0a1e3d]/70 hover:text-[#0a1e3d]" : "text-white/70 hover:text-white";
+  const signInColor = isDropdownOpen
+    ? "text-black hover:text-black"
+    : theme === "light"
+    ? "text-[#0a1e3d]/70 hover:text-[#0a1e3d]"
+    : "text-white/70 hover:text-white";
 
   const clearTimer = useCallback(() => {
     if (timeoutRef.current) {
@@ -642,7 +715,7 @@ export default function Navbar({ theme = "dark" }: { theme?: NavTheme }) {
   }, []);
 
   const startCloseTimer = useCallback(() => {
-    timeoutRef.current = setTimeout(() => setActiveMenu(null), 200);
+    timeoutRef.current = setTimeout(() => setActiveMenu(null), 320);
   }, []);
 
   const handleMenuEnter = useCallback(
@@ -650,8 +723,6 @@ export default function Navbar({ theme = "dark" }: { theme?: NavTheme }) {
       clearTimer();
       if (label in dropdownMap) {
         setActiveMenu(label);
-      } else {
-        setActiveMenu(null);
       }
     },
     [clearTimer]
@@ -664,65 +735,63 @@ export default function Navbar({ theme = "dark" }: { theme?: NavTheme }) {
     <MobileNav theme={theme} />
     <div className="fixed top-0 left-0 right-0 z-50 hidden md:flex flex-col items-center pt-4 px-4">
       <motion.div
-        className="relative"
-        animate={{
-          width: isDropdownOpen ? "58.33vw" : "83.33vw",
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 260,
-          damping: 30,
-          mass: 0.8,
-        }}
+        className="relative w-[83.33vw] max-w-[1600px]"
+        animate={{ width: navbarWidth }}
+        transition={{ type: "spring", stiffness: 240, damping: 26, mass: 0.85 }}
         onMouseLeave={startCloseTimer}
         onMouseEnter={clearTimer}
       >
         {/* ── Top Bar ── */}
-        <div className="flex items-center justify-between w-full h-12">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full h-12">
           {/* Logo area */}
-          <AnimatePresence mode="wait">
-            {isDropdownOpen ? (
-              <motion.div
-                key="icon-only"
-                initial={{ opacity: 0, scale: 0.7, width: 0 }}
-                animate={{ opacity: 1, scale: 1, width: "auto" }}
-                exit={{ opacity: 0, scale: 0.7, width: 0 }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
-                className="flex-shrink-0 cursor-pointer overflow-hidden"
-              >
-                <LogoIcon size={28} color={logoColor} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="full-logo"
-                initial={{ opacity: 0, width: 0 }}
-                animate={{ opacity: 1, width: "auto" }}
-                exit={{ opacity: 0, width: 0 }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
-                className="flex-shrink-0 overflow-hidden"
-              >
-                <ChargeflowLogo color={logoColor} />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <motion.div
+            className="justify-self-start flex items-center gap-4 origin-left"
+            animate={{ x: sideShift, scale: sideScale }}
+            transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.8 }}
+          >
+            <AnimatePresence mode="wait">
+              {isDropdownOpen ? (
+                <motion.div
+                  key="icon-only"
+                  initial={{ opacity: 0, scale: 0.7, width: 0 }}
+                  animate={{ opacity: 1, scale: 1, width: "auto" }}
+                  exit={{ opacity: 0, scale: 0.7, width: 0 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                  className="flex-shrink-0 cursor-pointer overflow-hidden"
+                >
+                  <LogoIcon size={50} color={logoColor} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="full-logo"
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "auto" }}
+                  exit={{ opacity: 0, width: 0 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                  className="flex-shrink-0 overflow-hidden"
+                >
+                  <ChargeflowLogo color={logoColor} />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-          {/* Blue diamond decoration (visible in default state) */}
-          <AnimatePresence>
-            {!isDropdownOpen && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
-                className="flex-shrink-0 ml-4"
-              >
-                <div className="w-2.5 h-2.5 bg-[#4f6ef7] rotate-45" />
-              </motion.div>
-            )}
-          </AnimatePresence>
+            <AnimatePresence>
+              {!isDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                  className="flex-shrink-0"
+                >
+                  <div className="w-2.5 h-2.5 bg-[#4f6ef7] rotate-45" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
           {/* Center pill */}
-          <div className={`flex items-center ${pillBg} backdrop-blur-xl rounded-full px-1 py-[3px] border ${pillBorder} mx-auto transition-colors duration-300`}>
+          <div className={`justify-self-center relative z-10 flex items-center ${pillBg} backdrop-blur-xl rounded-full px-1 py-[3px] border ${pillBorder} transition-colors duration-300`}>
             {menuItems.map((item) => (
               <button
                 key={item.label}
@@ -739,14 +808,18 @@ export default function Navbar({ theme = "dark" }: { theme?: NavTheme }) {
           </div>
 
           {/* Right buttons */}
-          <div className="flex items-center gap-4 flex-shrink-0">
+          <motion.div
+            className="justify-self-end flex items-center gap-4 flex-shrink-0 origin-right"
+            animate={{ x: -sideShift, scale: sideScale }}
+            transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.8 }}
+          >
             <button className={`${signInColor} text-[10.5px] font-semibold tracking-[0.08em] flex items-center gap-1.5 transition-colors whitespace-nowrap`}>
               SIGN IN <ArrowUpRight />
             </button>
             <button className="bg-[#4f46e5] hover:bg-[#4338ca] text-white text-[10.5px] font-semibold tracking-[0.08em] px-5 py-2.5 rounded-full flex items-center gap-1.5 transition-colors whitespace-nowrap">
               SIGN UP <ArrowUpRight />
             </button>
-          </div>
+          </motion.div>
         </div>
 
         {/* ── Dropdown Panel ── */}
